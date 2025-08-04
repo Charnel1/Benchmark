@@ -1,0 +1,154 @@
+with st.popover("Access"):
+        st.session_state.user_id = st.selectbox(
+            "User", options=['25', '51'], key="AccessUser")
+
+
+    def UserFromRole():
+        data = _fetch_data(
+            #
+            f"SELECT username, position FROM mysql.users_tb WHERE role = '{st.session_state.current_role}'")
+        st.write(data)
+        return data
+
+    def UserFromBetreuer_Status(username):
+        data = _fetch_data(
+            f"SELECT username, Betreuer_Status FROM mysql.users_tb WHERE username = '{username}'")
+        st.write(data)
+        return data
+
+    def UserPostionMapping(data):
+        returnDict = {}
+        for entry in range(len(data)):
+            match data[entry].get('position'):
+
+                case "MA":
+                    returnDict[data[entry].get('username')] = "Mitarbeiter"
+
+                case "FK":
+                    returnDict[data[entry].get('username')] = "Führungskraft"
+
+                case "GF":
+                    returnDict[data[entry].get('username')] = "Geschäftsführer"
+        return returnDict
+
+    def UpdatePosition(username, NeuePosition):
+        _query_data(
+            f"UPDATE mysql.users_tb SET position = '{NeuePosition}' WHERE username ='{username}'")
+
+    def UpdateBetreuer_Status(username, status):
+        print(status)
+        print(username)
+
+    userData = UserPostionMapping(UserFromRole())
+    print(userData)
+
+    Optionen = {"Mitarbeiter": "MA",
+                "Führungskraft": "FK", "Geschäftsführer": "GF"}
+
+    st.selectbox(label="Username", options=userData.keys(), key="P_username")
+    st.selectbox(label="Position", options=Optionen.keys(), key="P_Position", placeholder=userData.get(
+        st.session_state.P_username))
+
+    BeStatus = UserFromBetreuer_Status(st.session_state.P_username)
+
+    if st.session_state.current_role == "7Werk":
+        status = st.toggle("Partner Betreungs Status",
+                           #
+                           value=BeStatus[0].get('Betreuer_Status'), key="Be_Status", on_change=UpdateBetreuer_Status(st.session_state.P_username, status))
+
+    if st.button("Speichern", key="SaveP"):
+        UpdatePosition(st.session_state.P_username,
+                       Optionen.get(st.session_state.P_Position))
+        st.success("Änderung wurde gespeichert")
+
+    print(BeStatus)
+
+
+_query_data("""INSERT INTO mysql.Partner_details 
+            (Firmenname, 
+            strasse, 
+            plz,
+            ort, 
+            primary_Farbe,
+            secondary_Farbe, 
+            primary_font_Farbe, 
+            secondary_font_Farbe,
+            partner_status, 
+            zoho_nutzer_id, 
+            firmen_tag,
+            partner_id
+            ) VALUES (
+            "4Service-Systems GmbH",
+            "Joseph-Funken-Straße 27", 
+            56070,
+            "Koblenz",
+            "RGB(77, 149, 199)",
+            "RGB(88, 83, 80)",
+            "RGB(252,252,252)",
+            "RGB(252,252,252)",
+            'Professional-Partner',
+            93065000067677001,
+            '4Service',
+            15          
+            );""")
+
+page1 = st.Page("page1.py", title="Page 1")
+page2 = st.Page("page2.py", title="Page 2")
+page3 = st.Page("page3.py", title="Page 3")
+
+# Build navigation dynamically
+page_dict = {}
+
+# Add pages conditionally based on some state
+if condition1:
+    page_dict["Section 1"] = [page1, page2]
+if condition2:
+    page_dict["Section 2"] = [page3]
+
+# Create navigation with dynamic pages
+if page_dict:
+    pg = st.navigation(page_dict)
+else:
+    pg = st.navigation([st.Page(default_page)])
+
+pg.run()
+
+
+Angebotskonfigurator = st.Page(
+        Vergleich_page, title="Angebotskonfigurator")
+
+Verlauf = st.Page(History_page, title="Angebotsverlauf")
+
+Abmelden = st.Page(Abmelden_page, title="Abmelden")
+
+Abrechnungen = st.Page(Abgrechungnen_page, title="Abrechnungen")
+
+Provision = st.Page(provision_page, title="Provision")
+
+Produktbewertungen = st.Page(
+    Produkt_bewertung_page, title="Produktbewertungen")
+
+position_page = st.Page(Produkt_bewertung_page, title="Access")
+
+Admin_page = st.Page(Admin_page, title="Main Admin page")
+
+Einstellungen = st.Page(Settings_page, title="Einstellungen")
+
+Batch_Nutzer_erstellung = st.Page(
+    render_Batch_user_admin_page, title="Multi Nutzer erstellung")
+
+Fragen_administration = st.Page(
+    render_Fragen_admin_page, title="Fragen administration")
+
+Seiten_administration = st.Page(
+    render_Pages_admin_page, title="Seiten administration")
+
+Single_Nutzer_erstellung = st.Page(
+    render_user_admin_page, title="Single Nutzer erstellung")
+
+Produkt_administration = st.Page(
+    Produkt_admin_page, title="Produkt administration")
+
+Log_Nutzer_Daten = st.Page(log_page, title="Log & Nutzer Daten")
+
+Abmelden = st.Page(Abmelden_page, title="Abmelden")

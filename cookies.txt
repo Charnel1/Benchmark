@@ -1,0 +1,124 @@
+@st.fragment
+def get_manager():
+    st.session_state.CookieManager_ON = True
+    return stx.CookieManager(), True
+
+
+# cookie_manager, _bool = get_manager()
+
+# Cookie saved login
+    '''if cookie_manager.get("logged_in_Already") == "True" and st.session_state.cookies_set == False:
+        st.session_state.user_id = cookie_manager.get('user_id')
+        st.session_state.current_username = cookie_manager.get('username')
+        st.session_state.current_Vorname = cookie_manager.get('Vorname')
+        st.session_state.current_Nachname = cookie_manager.get('Nachname')
+        st.session_state.current_Telefonnummer_mobil = cookie_manager.get(
+            'Telefonnummer_mobil')
+        st.session_state.current_Telefonnummer_Festnetzt = cookie_manager.get(
+            'Telefonnummer_festnetzt')
+        st.session_state.current_Kontak_email = cookie_manager.get(
+            'kontakt_email')
+        st.session_state.current_acount_email = cookie_manager.get(
+            'user_email')
+        st.session_state.current_role = cookie_manager.get('role')
+        st.session_state.Zoho_Nutzer_id_Person = cookie_manager.get(
+            'Zoho_Nutzer_id_Person')
+        st.session_state.logged_in = True
+        st.session_state.cookies_set = True
+'''
+
+
+# Cookie saved login
+        '''if st.session_state.cookies_set != True:
+            cookie_manager.set(
+                cookie="user_id", val=st.session_state.user_id, max_age=432000,  key="user_id")
+            cookie_manager.set(
+                cookie="username", val=st.session_state.current_username, max_age=432000, key="username")
+            cookie_manager.set(
+                cookie="user_email", val=st.session_state.current_acount_email, max_age=432000, key="user_email")
+
+            cookie_manager.set(
+                cookie="Vorname", val=st.session_state.current_Vorname, max_age=432000, key="Vorname")
+            cookie_manager.set(
+                cookie="Nachname", val=st.session_state.current_Nachname, max_age=432000, key="Nachname")
+
+            cookie_manager.set(cookie="Telefonnummer_festnetzt",
+                               val=st.session_state.current_Telefonnummer_Festnetzt, max_age=432000, key="Telefonnummer_festnetzt")
+            cookie_manager.set(cookie="Telefonnummer_mobil",
+                               val=st.session_state.current_Telefonnummer_mobil, max_age=432000, key="Telefonnummer_mobil")
+
+            cookie_manager.set(cookie="kontakt_email",
+                               val=st.session_state.current_Kontak_email, max_age=432000, key="kontakt_email")
+            cookie_manager.set(
+                cookie="role", val=st.session_state.current_role, max_age=432000, key="role")
+            cookie_manager.set(cookie="Zoho_Nutzer_id_Person",
+                               val=st.session_state.Zoho_Nutzer_id_Person, max_age=432000, key="Zoho_Nutzer_id_Person")
+
+            cookie_manager.set(cookie="logged_in_Already",
+                               val='True', max_age=432000, key="logged_in_Already")
+
+            st.session_state.cookies_set = True'''
+
+
+# set_all_logout_cookies(cookie_manager)
+
+
+
+
+def set_all_logout_cookies(cookie_manager: stx.CookieManager):
+    cookie_manager.set(cookie="user_id", val="False", max_age=0, key="set-1")
+    cookie_manager.set(cookie="username", val="False", max_age=0, key="set-2")
+    cookie_manager.set(cookie="user_email", val="False",
+                       max_age=0, key="set-3")
+    cookie_manager.set(cookie="Vorname", val="False", max_age=0, key="set-4")
+    cookie_manager.set(cookie="Nachname", val="False", max_age=0, key="set-5")
+    cookie_manager.set(cookie="Telefonnummer_festnetzt",
+                       val="False", max_age=0, key="set-6")
+    cookie_manager.set(cookie="Telefonnummer_mobil",
+                       val="False", max_age=0, key="set-7")
+    cookie_manager.set(cookie="kontakt_email",
+                       val="False", max_age=0, key="set-8")
+    cookie_manager.set(cookie="role", val="False", max_age=0, key="set-9")
+    cookie_manager.set(
+        cookie="Zoho_Nutzer_id_Person", val="False", max_age=0, key="set-10")
+
+    cookie_manager.set(cookie="logged_in_Already",
+                       val="False", max_age=0, key="set-11")
+
+
+def set_all_login_cookies(cookie_manager: stx.CookieManager):
+    cookie_manager.set(
+        cookie="user_id", val=st.session_state.user_id, max_age=432000,  key="user_id")
+    cookie_manager.set(
+        cookie="username", val=st.session_state.current_username, max_age=432000, key="username")
+    cookie_manager.set(
+        cookie="user_email", val=st.session_state.current_acount_email, max_age=432000, key="user_email")
+
+    cookie_manager.set(
+        cookie="Vorname", val=st.session_state.current_Vorname, max_age=432000, key="Vorname")
+    cookie_manager.set(
+        cookie="Nachname", val=st.session_state.current_Nachname, max_age=432000, key="Nachname")
+
+    cookie_manager.set(cookie="Telefonnummer_festnetzt",
+                       val=st.session_state.current_Telefonnummer_Festnetzt, max_age=432000, key="Telefonnummer_festnetzt")
+    cookie_manager.set(cookie="Telefonnummer_mobil",
+                       val=st.session_state.current_Telefonnummer_mobil, max_age=432000, key="Telefonnummer_mobil")
+
+    cookie_manager.set(cookie="kontakt_email",
+                       val=st.session_state.current_Kontak_email, max_age=432000, key="kontakt_email")
+    cookie_manager.set(
+        cookie="role", val=st.session_state.current_role, max_age=432000, key="role")
+
+    cookie_manager.set(
+        cookie="Zoho_Nutzer_id_Person", val=st.session_state.Zoho_Nutzer_id_Person, max_age=432000, key="Zoho_Nutzer_id_Person")
+
+    cookie_manager.set(cookie="logged_in_Already",
+                       val='True', max_age=432000, key="logged_in_Already")
+
+
+                       for item in get_user_Abrechnungs_status(
+            st.session_state.current_username)[0].keys():
+        if Abrechnungen_translate_dict.get(item) is not None:
+            print(Abrechnungen_translate_dict.get(item))
+            partner_acces_list.append(
+                Abrechnungen_translate_dict.get(item))
