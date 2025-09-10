@@ -13,6 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent
 PARTNER_LOGO_DIR = BASE_DIR / "Partner_Logo"
 DEFAULT_LOGO = BASE_DIR / "7W.png"
 
+
 # --- Modules applicatifs (inchangés) ---
 from lib.render import (
     render_Produkt_vergleich,
