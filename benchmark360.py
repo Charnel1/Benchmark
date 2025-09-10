@@ -36,6 +36,7 @@ from lib.log import log_User_loggin, log_User_logout
 from lib.impressum import render_footer_links, render_legal_page
 
 
+
 # =========================
 # Assets: chemins robustes
 # =========================
