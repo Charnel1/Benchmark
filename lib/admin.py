@@ -3,6 +3,7 @@ from lib.db import fetch_data, query_data
 import datetime
 import bcrypt
 
+
 def add_user(_username, _password, _role, _email_A, _Vorname, _Nachname, _email_K, _tele_M, _tele_F, _nutzer_ID):
 
     now = datetime.datetime.now()
